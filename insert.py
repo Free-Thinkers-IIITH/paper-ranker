@@ -8,8 +8,18 @@ db = client.ssd
 collection = db.paper
 requesting = []
 
-with urllib.request.urlopen('https://dblp.org/search/publ/api?q=machine%20learning&h=10&format=json') as url:
-    data = json.loads(url.read().decode())
+
+url = "https://dblp.org/search/publ/api" 
+params = { 
+    "q": "computer network", 
+    "h": "100", 
+    "format": "json" 
+}     
+query_string = urllib.parse.urlencode( params ) 
+url = url + "?" + query_string 
+ 
+with urllib.request.urlopen(url) as url_:
+    data = json.loads(url_.read().decode())
     requesting.append(InsertOne(data))
 
 result = collection.bulk_write(requesting)

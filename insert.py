@@ -3,7 +3,7 @@ import pymongo
 import json
 from pymongo import MongoClient, InsertOne
 
-client = pymongo.MongoClient('mongodb+srv://asxz:asxz@cluster0.4g04r.mongodb.net/ssd?retryWrites=true&w=majority')
+client = pymongo.MongoClient('mongodb+srv://root:root@cluster0.4g04r.mongodb.net/myFirstDatabase?retryWrites=true&w=majority')
 db = client.ssd
 collection = db.paper
 requesting = []
@@ -11,7 +11,7 @@ requesting = []
 
 url = "https://dblp.org/search/publ/api" 
 params = { 
-    "q": "computer network", 
+    "q": "hashing", 
     "h": "100", 
     "format": "json" 
 }     

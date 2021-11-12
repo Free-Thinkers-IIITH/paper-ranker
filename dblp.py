@@ -4,7 +4,7 @@ import time
 from rank_mapper import build_rank_dict, get_rank
 
 
-def fetch_dblp(topic, hit_count):
+def fetch_dblp(topic, hit_count = 100):
     url = "https://dblp.org/search/publ/api"
     params = {
         "q": topic,

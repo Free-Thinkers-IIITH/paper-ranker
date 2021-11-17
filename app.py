@@ -87,7 +87,7 @@ def get_papers(key, hits=30):
     temp = keyword_collection.objects(keyword=str(hash(key))).first()
     if temp:
         start = time.time()
-        print('From DB')
+        print(f'fetching {key} papers From DB')
         paper_list = list()
         for pid in temp.papers:
             paper_info = dict()
@@ -102,7 +102,7 @@ def get_papers(key, hits=30):
         end = time.time()
         print(f'Total {len(paper_list)} papers fetched in {end-start} seconds')
     else:
-        print('From API')
+        print(f'fetching {key} papers From API')
         start = time.time()
         paper_list = fetch_dblp(key, hits)
         end = time.time()

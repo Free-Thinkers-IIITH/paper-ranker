@@ -1,7 +1,7 @@
 from pymongo import MongoClient
 from insert import insert_dblp
 
-def fetch_from_db(keyword):
+def fetch_from_db(keyword,hit_count = 100):
     # client = MongoClient('mongodb://localhost:27017/paper_db')
     client = MongoClient('mongodb+srv://asxz:asxz@cluster0.4g04r.mongodb.net/ssd?retryWrites=true&w=majority')
 
@@ -9,7 +9,7 @@ def fetch_from_db(keyword):
     papers_collec=db['papers'].find({'$text':{'$search':keyword}})# , 'rank':{'$ne':'NA'}})
     paper_lst=list(papers_collec)
     if len(paper_lst) == 0:
-        insert_dblp(keyword)
+        insert_dblp(keyword,hit_count)
     papers_collec=db['papers'].find({'$text':{'$search':keyword}})# , 'rank':{'$ne':'NA'}})
     paper_lst=list(papers_collec)
     return paper_lst

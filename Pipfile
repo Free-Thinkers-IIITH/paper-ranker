@@ -8,6 +8,9 @@ pymongo = "*"
 dnspython = "*"
 flask = "*"
 bcrypt = "*"
+flask-paginate = "*"
+flask-mongoengine = "*"
+mongoengine = "*"
 
 [dev-packages]
 

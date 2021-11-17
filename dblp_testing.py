@@ -36,14 +36,22 @@ def fetch_dblp(topic, hit_count = 100):
                 paper_info['venue'] = entry['info']['venue']
                 paper_info['year'] = entry['info']['year']
                 paper_info['url'] = entry['info']['url']
-                paper_info['rank'] = get_rank(
-                    paper_info['venue'].split()[0].lower())
+                rank = get_rank(paper_info['venue'].split()[0].lower())
+                #search using full name
+                if rank is None:
+                    rank = get_rank(paper_info['venue'].lower())
+                if rank is None:
+                    rank = "Unranked"
+                paper_info['rank'] = rank
                 paper_list.append(paper_info)
         # write to file
         # open(topic, 'w').write(json.dumps(paper_list))
         return paper_list
-build_rank_dict('ranks1.json')
-build_rank_dict('ranks2.json')
+
+build_rank_dict('ranks1.json','Acronym')
+build_rank_dict('ranks1.json','Standard Name')
+build_rank_dict('ranks2.json','Acronym')
+build_rank_dict('ranks2.json','Standard Name')
 
 while True:
     topic = input("Enter topic: ")

@@ -3,12 +3,12 @@ from pprint import pprint
 import json
 import urllib.request
 
-def get_papers(keyword):
+def get_papers(keyword,hit_count=100):
     '''This function gets data from dblp api for a particular keyword and returns it'''
     url = "https://dblp.org/search/publ/api" 
     params = { 
         "q": keyword, 
-        "h": "100", 
+        "h": hit_count,
         "format": "json" 
     } 
     query_string = urllib.parse.urlencode( params ) 
@@ -55,7 +55,7 @@ def map_dblp_data(raw_data,keyword):
     return final_data
     
 
-def insert_dblp(keyword):
+def insert_dblp(keyword,hit_count=100):
     '''This function inserts the data from dblp api into database'''
     #Connect to db
     # client = MongoClient('mongodb://localhost:27017/paper_db')
@@ -66,7 +66,7 @@ def insert_dblp(keyword):
     #Get conference list
     conference_list=list(db['conferences'].find())
     #Get papers list from dblp api
-    paper_list=get_papers(keyword)
+    paper_list=get_papers(keyword,hit_count)
     paper_list=paper_list['result']['hits']['hit']
     final_list=list()
 
